@@ -4,7 +4,9 @@
     <div>
         <span>id: </span>{{book.id}}
     </div>
-    <div><span>Cover: </span>{{book.bookCover}}</div>
+    <div>
+        <span>Cover: </span>{{book.coverName}}
+    </div>
     <div>
         <label for="title">title: </label>
         <input id="title" [(ngModel)] = "book.title" placeholder="title">
@@ -13,4 +15,14 @@
         <label for="author">author: </label>
         <input id="author" [(ngModel)] = "book.author" placeholder="author">
      </div>
+     <div>
+        <label for="description">description: </label>
+        <input id="description" [(ngModel)] = "book.description" placeholder="description">
+     </div>
+     <div>
+        <span>Status: </span>{{book.status}}
+     </div>
 </div>
+<button (click)="goBack()">go back</button>
+<button (click)="save()">save</button>
+<button title="delete book" (click)="delete()">delete book</button>
