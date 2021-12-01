@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Book } from '../book';
+import { Book, BookStatus } from '../book';
 import { BookService } from '../book.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { BookService } from '../book.service';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  @Input() book?: Book;
+  book: Book | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
@@ -19,12 +20,32 @@ export class BookDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBooks();
+    this.getBook();
   }
 
-  getBooks(): void {
+  getBook(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookService.getBook(id)
     .subscribe(book => this.book = book);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  save(): void {
+    if(this.book) {
+      this.bookService.updateBook(this.book)
+      .subscribe(() => this.goBack());
+    }
+  }
+
+  delete(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.bookService.deleteBook(id)
+    .subscribe();
+  }
+  ShowStatus(eStatus: BookStatus): string {
+    return BookStatus[eStatus];
   }
 }

@@ -1,0 +1,16 @@
+<p>history works!</p>
+<mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile>
+       <span> BORROW </span>
+       <tr *ngFor='let borrow of BorrowLogs'>
+        {{ borrow.date}}  
+    </tr>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <span>RETURN</span>
+        <tr *ngFor='let return of ReturnLogs'>
+            {{ return.date}}  
+        </tr>
+    </mat-grid-tile>
+</mat-grid-list>
+  

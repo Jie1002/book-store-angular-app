@@ -2,10 +2,11 @@
 <div *ngIf="book">
     <h2>{{ book.title | uppercase }} Details</h2>
     <div>
-        <span>id: </span>{{book.id}}
+      <label for="id">Id: </label>
+       {{book.id}}
     </div>
     <div>
-        <span>Cover: </span>{{book.coverName}}
+      <img class="cover" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
     </div>
     <div>
         <label for="title">title: </label>
@@ -20,8 +21,10 @@
         <input id="description" [(ngModel)] = "book.description" placeholder="description">
      </div>
      <div>
-        <span>Status: </span>{{book.status}}
+        <span>Status: </span>{{ShowStatus(book.status)}}
      </div>
+     <hr>
+     <app-history [bookId]="book.id"></app-history>
 </div>
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>

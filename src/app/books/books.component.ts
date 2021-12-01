@@ -12,7 +12,7 @@ import { MessageService } from '../message.service';
 export class BooksComponent implements OnInit {
   books: Book[] = [];
 
-  selectedBook?: Book; 
+  // selectedBook?: Book; 
 
   constructor(private bookService: BookService
     , private messageService: MessageService) { }
@@ -26,8 +26,17 @@ export class BooksComponent implements OnInit {
     .subscribe(books => this.books = books);
   }
 
-  onSelect(book: Book): void {
-    this.selectedBook = book;
-    this.messageService.add(`BooksComponent: Selected book id = ${book.id}`);
+  // onSelect(book: Book): void {
+  //   this.selectedBook = book;
+  //   this.messageService.add(`BooksComponent: Selected book id = ${book.id}`);
+  // }
+
+  add(title: string): void {
+    title = title.trim();
+    if (!title) { return; } 
+    this.bookService.addBook({ title } as Book)
+    .subscribe(
+      book => {this.books.push(book);}
+    );    
   }
 }
